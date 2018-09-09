@@ -45,12 +45,12 @@ body {
 }
 
 a {
-    color: #515151;
+    color: #3050c0;
     text-decoration: none;
     transition: all 0.3s;
     &:hover,
     &:focus {
-        color: #EC407A;
+        color: #6090ff;
         text-decoration: dotted;
     }
 }
@@ -172,7 +172,7 @@ blockquote {
 
 code,
 pre {
-    font-family: Menlo, Monaco, "Courier New", monospace;
+    font-family: Inconsolata, Menlo, Monaco, "Courier New", monospace;
 }
 
 code {
@@ -213,7 +213,7 @@ pre code {
 }
 
 .gist .gist-file {
-    font-family: Menlo, Monaco, "Courier New", monospace !important;
+    font-family: Inconsolata, Menlo, Monaco, "Courier New", monospace !important;
 }
 
 .gist .markdown-body {
@@ -293,13 +293,13 @@ tbody tr:nth-child(odd) th {
         padding-left: 9px;
         padding-right: 9px;
         text-align: center;
-        border: 2px #EC407A solid;
-        color: #EC407A;
+        border: 2px #3050c0 solid;
+        color: #3050C0;
         &:hover,
         &:focus {
             color: #fff;
             border-color: #fff;
-            background: #EC407A;
+            background: #3050C0;
         }
     }
 }
@@ -406,10 +406,10 @@ tbody tr:nth-child(odd) th {
         }
         span {
             font-weight: 800;
-            color: #EC407A;
+            color: #3050C0;
             &:hover,
             &:focus {
-                color: #EC407A;
+                color: #3050C0;
                 text-decoration: none;
             }
         }
