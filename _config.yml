@@ -16,20 +16,19 @@ avatar: http://actinid.org/yo3.jpg
 #
 
 # Includes an icon in the footer for each username you enter
-footer-links:
-  dribbble:
-  email: BatchDrake@gmail.com
-  facebook:
-  flickr:
-  github: batchdrake
-  instagram:
-  linkedin: https://www.linkedin.com/in/gonzalo-jos%C3%A9-carracedo-carballal-90134358/
-  pinterest:
-  rss: # just type anything here for a working RSS icon
-  twitter: BatchDrake
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
-  youtube: # user/BatchDrake
-  googleplus: # anything in your profile username that comes after plus.google.com/
+dribbble:
+email: BatchDrake@gmail.com
+facebook:
+flickr:
+github: batchdrake
+instagram:
+linkedin: https://www.linkedin.com/in/gonzalo-jos%C3%A9-carracedo-carballal-90134358/
+pinterest:
+rss: # just type anything here for a working RSS icon
+twitter: BatchDrake
+stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
+youtube: # user/BatchDrake
+googleplus: # anything in your profile username that comes after plus.google.com/
 
 
 # Enter your Disqus shortname (not your username) to enable commenting on posts
@@ -49,6 +48,21 @@ url: http://actinid.org
 # then add in the baseurl here, like this: "/repository-name"
 baseurl: ""
 
+#
+# Links and behavior
+#
+paginate 5
+paginate_path "/page:num/"
+
+baseurl:            ""
+permalink:          /:year/:month/:day/:title/
+
+nav:
+  - name:           "Main page"
+    href:           "http://actinid.org"
+  - name:           "About me"
+    href:           "/about"
+    
 #
 # !! You don't need to change any of the configuration flags below !!
 #
