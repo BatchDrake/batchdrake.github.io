@@ -59,6 +59,8 @@ permalink:          /:year/:month/:day/:title/
 
 nav:
   - name:           "Main page"
+    href:           "/"
+  - name:           "Resumé"
     href:           "http://actinid.org"
   - name:           "About me"
     href:           "/about"
