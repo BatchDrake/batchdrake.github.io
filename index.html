@@ -16,8 +16,8 @@ layout: default
     <div class="post-list">
         <h2 class="post-title">
       <a href="{{ post.url }}">{{ post.title }}</a>
-    </h2> {% if post.description %}
-        <p>{{ post.description }}</p>
+    </h2> {% if post.excerpt %}
+        <p>{{ post.excerpt }}</p>
         {% endif %}
         <div class="post-date">
             <time>{{ post.date | date_to_string }}</time>
