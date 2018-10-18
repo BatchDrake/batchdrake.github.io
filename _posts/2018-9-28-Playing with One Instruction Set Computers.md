@@ -1,4 +1,4 @@
-After a fruitful conversation with [SkUaTeR](https://twitter.com/sanguinawer) few weeked ago, I discovered the wonderful world of [OISC](https://en.wikipedia.org/wiki/One_instruction_set_computer)s (One Instruction Set Computers).
+After a fruitful conversation with [SkUaTeR](https://twitter.com/sanguinawer) few weekeds ago, I discovered the wonderful world of [OISC](https://en.wikipedia.org/wiki/One_instruction_set_computer)s (One Instruction Set Computers).
 
 OISCs refer to (usually virtual) machines whose instruction set architecture is composed by only one instruction. The cool feature about these machines is that they are  [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), and therefore can be programmed to become a universal computer.
 
