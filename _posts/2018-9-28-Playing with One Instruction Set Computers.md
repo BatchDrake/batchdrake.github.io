@@ -2,7 +2,7 @@ After a fruitful conversation with [SkUaTeR](https://twitter.com/sanguinawer) fe
 
 OISCs refer to (usually virtual) machines whose instruction set architecture is composed by only one instruction. The cool feature about these machines is that they are  [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), and therefore can be programmed to become a universal computer.
 
-The single-instruction architecture we discussed was based on the [RSSB](https://esolangs.org/wiki/RSSB) instruction and follows a [Von Neumann architecture](https://en.wikipedia.org/wiki/Von_Neumann_architecture) (this is, data and code belong to the same address space). Memory is word-addressed (e.g. 32 bit words) and both registers and I/O are memory mapped. In particular, the following addresses are reserved:
+The single-instruction architecture we discussed was based on the [RSSB](https://esolangs.org/wiki/RSSB) instruction and follows a [Von Neumann architecture](https://en.wikipedia.org/wiki/Von_Neumann_architecture) (this is, data and code belong to the same address space). <!--more--> Memory is word-addressed (e.g. 32 bit words) and both registers and I/O are memory mapped. In particular, the following addresses are reserved:
 
 | Address | Contains |
 |------------|-------------|
@@ -18,12 +18,12 @@ The `rssb` instructions always takes a memory location as operand, and behaves a
 void
 rssb(unsigned long *operand)
 {
-  if (*operand < $acc)
-    ++$ip;
+  if (*operand < acc)
+    ++ip;
   
-  *operand -= $acc;
-  $acc = *operand;
-  ++$ip;
+  *operand -= acc;
+  acc = *operand;
+  ++ip;
 }
 ```
 
@@ -31,7 +31,7 @@ The fact that the `rssb` has always the same format has an interesting consequen
 
 And therefore the only information we need to enconde is the operand of each `rssb` instruction. For example, the following instructions:
 
-```php
+```
    rssb 0x342a
    rssb $0
    rssb $a
