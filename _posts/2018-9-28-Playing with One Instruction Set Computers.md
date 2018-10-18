@@ -38,7 +38,7 @@ And therefore the only information we need to enconde is the operand of each `rs
    rssb $out
 ```
 Will be enconded as:
-```php
+```
    0x342a, 0x0002, 0x0001, 0x0004
 ```
 Implying that the same `rssb` instruction can be used to define both code and data. Pretty simple, isn't it? Let's see how we can do some useful computation with it :)
@@ -48,7 +48,7 @@ This will be just a summary of how most common modern assembly instructions can 
 
 Maybe the most basic operation of all of them is **clearing the accumulator**. This can be simply done by:
 
-```php
+```
 .macro ZERO
     rssb $a
 .end
@@ -56,7 +56,7 @@ Maybe the most basic operation of all of them is **clearing the accumulator**. T
 
 Since we are subtracting `$a` from itself, its contents will become zero. Also, the result is non-negative, so the next instruction is not skipped. We introduce the keyword `.macro` to show how the previous code can be used to produce more and more complex behaviors. For example, to **clear arbitrary memory addresses**:
 
-```php
+```
 .macro CLEAR ADDR
     ZERO
     rssb ADDR
@@ -66,7 +66,7 @@ Since we are subtracting `$a` from itself, its contents will become zero. Also, 
 
 Which just subtracts the memory address from itself, clearing both the address and the accumulator. Some alternatives to this approach can be found in the Internet:
 
-```php
+```
 .macro CLEAR ADDR
     rssb ADDR
     rssb ADDR # Conditionally executed
@@ -84,7 +84,7 @@ Another interesting macro we can define here is `INVERT`, used to **invert the a
 
  **Retrieving a memory word** and placing it in  the accumulator is also easy if we ensure the accumulator is cleared first:
 
-```php
+```
 .macro GET ADDR
     rssb $a
     rssb ADDR
@@ -93,7 +93,7 @@ Another interesting macro we can define here is `INVERT`, used to **invert the a
 
 Or, using macros:
 
-```php
+```
 .macro GET ADDR
     ZERO
     rssb ADDR
@@ -104,7 +104,7 @@ Which is slightly faster, as the second instruction is executed only if the accu
 
 **To load an immediate NONZERO value** (or the address of a label) we leverage that `rssb` instructions can be used to define data:
 
-```php
+```
 .macro IMM VALUE
   GET OFFSET # In $a: address of LABEL (nonzero in general)
   rssb $0    # Invert $a. As $a is nonzero, the next instruction is skipped
@@ -116,13 +116,13 @@ OFFSET:
 ```
 
 **Storing information** is a bit trickier. We need a special memory location that must be cleared on initialization:
-```php
+```
 _start:
   CLEAR TMP
 ```
 
 And we use that location as a temporary storage, that must be cleared after usage:
-```php
+```
 .macro STORE ADDR
   rssb TMP      # Stores -$old_a in TMP
   rssb $a       # Only executed if $a was 0
@@ -135,7 +135,7 @@ And we use that location as a temporary storage, that must be cleared after usag
 
 Retrieving and clearing stuff sure is great, but we can definitely do more interesting things. How about **moving memory**? It can be as easy as:
 
-```php
+```
 .macro MOVE DEST ORIGIN
   GET ORIGIN
   STORE DEST # Note this leaves $a = 0
@@ -191,7 +191,7 @@ How to do this? First, let's take a look to what `rssb $ip` does:
 
 Therefore, if we want to jump to an arbitrary position, we have to put `RSSB_IP-LABEL+1` in it first. If we use `%` to refer to the current `$ip` of the assembled instruction, the jump instruction takes the form:
 
-```php
+```
 .macro JUMP LABEL
   GET LOOPOFF  # LOOPOFF is right after `rssb $ip`
   rssb $ip
@@ -204,7 +204,7 @@ And sice the instruction at `LOOPOFF` is right after `rssb $ip`(located at `RSSB
 
 There is something to take into account, though. It may happen that `rssb $ip` causes borrow, and may skip the first instruction at `LABEL`. In particular, this happens when the address of `LABEL` is *after* the `JUMP` instruction. In those cases, we must add a dummy instruction (e.g. `ZERO`) right after the jump target label:
 
-```php
+```
   JUMP FORWARD # Forward jump
 #
 # Some code
@@ -217,7 +217,7 @@ FORWARD:
 ## Comparisons and conditional branching
 We cannot do useful programming without comparisons and conditional branching, therefore we need first some comparison instruction. The following macro can be used to detect if `A < B` (and, therefore, if `A >= B`). If `A < B`, `CMP` will put `1` in the accumulator. Otherwise, it will leave it in `0`:
 
-```php
+```
 .macro CMP A B
   MOVE COPY, A 
   GET B
@@ -245,7 +245,7 @@ ONE:
 
 Conditional branching can be implemented on top of this instruction, using its result to compute the number of instructions that must be skipped if the condition is true (in particular, we use it to skip the `JUMP`). Note that this implies that the instruction jumps to the target `LABEL` if the condition is **false**:
 
-```php
+```
 .macro JGE A B LABEL # Jumps to label if A >= B
   CLEAR SKIP         # Set skip to 0
   CMP A, B           # Returns 1 if A < B, 0 otherwise
@@ -279,7 +279,7 @@ Adapting `JGE` to other conditions is trivial, boiling down to replace `CMP` by 
 ## Pointer madness
 Dealing with pointers in RSSB is extremely fun because it involves self-modifying code. In particular, pointer de-referencing is performed by altering an RSSB instruction to recover the word at the pointed address. The following macro would be equivalent to `$a = *(*ADDR)` in C.
 
-```php
+```
 .macro GET_PTR ADDR
   MOVE DO_GET, ADDR    # Alter instruction to retrieve given value
   ZERO 	       	       # Clear accumulator
@@ -290,7 +290,7 @@ DO_GET:
 
 Storing data through a pointer follows the same philosophy, requiring to keep a copy of the data in `TMP` first. The following macro performs the equivalent of `*(*ADDR) = $a` in C:
 
-```php
+```
 .macro STORE_PTR ADDR
   rssb TMP      # Save $a
   rssb $a       # Only executed if $a was 0
@@ -311,7 +311,7 @@ DO_STORE:
 ## A full-featured Hello World, with macros
 There is something we have not discussed yet though, and it is how to stop the VM. We will use the following seemingly nonsensical macro:
 
-```php
+```
 .macro EXIT
   ZERO           # Clear accumulator
   rssb $ip       # $ip = $a= SOMETHING, jump next.
@@ -323,7 +323,7 @@ This sequence of instructions causes the accumulator to become 1 and the `$ip` t
 
 Now we have all the tools to code the classical Hello World, using macros. Now it is not that difficult, right? ;)
 
-```php
+```
 ################################# ENTRY POINT #################################
 
 LOOP:
