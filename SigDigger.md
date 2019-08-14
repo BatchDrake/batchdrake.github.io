@@ -69,7 +69,7 @@ This is work in progress, and some help will also be appreciated (see below).
 ## Downloading or building SigDigger
 You can find build instructions in the [official GitHub repository](https://github.com/BatchDrake/SigDigger) . Pre-compiled binary releases are also available [here](https://github.com/BatchDrake/SigDigger/releases).
 
-## Your software is cool, is there something I can do to help?
+## Your software is cool, how could I help you?
 The easiest and most useful thing you can do is to use it, distribute it, talk about it! Try it with different devices and configurations, force its limits, break it. All feedback will guide my effort into something that is useful for everyone.
 
 If you found SigDigger useful and miss some documentation on the software, that's another way you can help. I'll make it available in this website.
