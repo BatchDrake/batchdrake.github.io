@@ -65,6 +65,8 @@ nav:
     href:           "/"
   - name:           "Resumé"
     href:           "http://actinid.org"
+  - name:	    "SigDigger"
+    href:	    /SigDigger
   - name:           "About me"
     href:           "/about"
     
