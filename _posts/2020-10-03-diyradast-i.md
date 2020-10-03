@@ -26,12 +26,12 @@ Of course, an LNB alone is of little use. We need an appropriate parabolic refle
 
 The question arises almost naturally out of these numbers: can I reproduce Penzias & Wilson experiments at home? 
 
-Let's start by calculating a rough estimate of the order of magnitude of the power increment due to the presence of Cyg A/Cas A with respecto to the background sky noise. According to this graph, we could assume that the background noise is dominated by the CMB at 2.9 K. But since both Cyg A and Cas A are rather close to the galactic plane, we'll be a bit more pessimistic and extend the C curve horizontally, rising the floor up to 15 K:
+Let's start by calculating a rough estimate of the order of magnitude of the power increment due to the presence of Cyg A/Cas A with respecto to the background sky noise. According to this graph, we could assume that the background noise is dominated by the CMB at 2.9 K and 4 GHz. But since both Cyg A and Cas A are rather close to the galactic plane, we'll be a bit more pessimistic and extend the C curve horizontally, rising the floor up to 15 K:
 
 <center><img src="{{ site.baseurl }}/images/noises2.gif" /></center>
 <center><small><em>Image obtained from <a href="https://azrefs.org/recommendation-itu-r-p-372-8-radio-noise.html">azrefs.org</a></em></small></center>
 
-The power spectral density at the LNB output when the beam (including all its sidelobes) covers a fixed-noise temperature region in the sky can be naively modelled as Johnson-Nyquist noise by:
+The power spectral density (PSD) at the LNB output when the beam (including all its sidelobes) covers a fixed-noise temperature region in the sky can be naively modelled as Johnson-Nyquist noise by:
 
 $$
 S_b=\frac{dP}{d\nu}=G(k_BT_{n}+k_BT_{s})
@@ -39,15 +39,15 @@ $$
 
 With $k_B$ the Boltzmann's constant, $T_n$ the typical noise temperature of the LNB's low noise amplifier, $T_s$ the noise temperature of the sky and $G$ the gain of the LNB. Easy, right? 
 
-The truth is that this formula rarely holds. Antennas are not perfect, and its sidelobes pick a lot of the surrounding noise. This phenomenon is called **spillover**, and implies that only a (hopefully big) fraction of the power entering the internal low noise amplifier actually comes from the sky. If we assume that the surrounding noise is purely thermal in nature and caused by the ambient temperature of the objects close to us (buildings, trees or the floor itself), we can introduce the parameter $\alpha$ describing the amount of spillover of our antenna. If $T_{amb}$ is the ambient temperature, a more realistic model could be:
+The truth is that this formula rarely holds. Antennas are not perfect, and their sidelobes pick a lot of surrounding noise. This phenomenon is called **spillover**, and implies that only a (hopefully big) fraction of the power entering the internal low noise amplifier will actually come from the sky. If we assume that the surrounding noise is purely thermal in nature and caused by the ambient temperature of the objects close to us (buildings, trees or the floor itself), we can introduce the parameter $\alpha$ describing the amount of spillover of our antenna. If $T_{amb}$ is the ambient temperature, a more realistic model could be:
 
 $$
 S=\frac{dP}{d\nu}=Gk_B\left[T_{n}+(1-\alpha)T_{s}+\alpha T_{amb}\right]
 $$
 
-$S$ will be our background sky level, as seen at the output of the LNB. In general, the power spectral density for astronomical sources is rather white (i.e. flat), even if we consider the typical bandwidths (~3 MHz) supported by low cost SDR receivers.
+$S$ will be our background sky level (in terms of PSD) as seen at the output of the LNB. In general, the power spectral density for astronomical sources is rather white (i.e. flat), even if we consider the typical bandwidths (~3 MHz) supported by low cost SDR receivers.
 
-Now let's consider what happens to the output power spectral density if our antenna is perfectly oriented towards a point source like Cas A or Cygnus A (with angular sizes way below 1º). Since these sources are rather small and/or irregular, and therefore difficult to characterize in terms of temperature and angular diameter, we will take their [spectral irradiance (also known as flux density)](https://en.wikipedia.org/wiki/Irradiance#Spectral_irradiance) into account instead. This quantity describes the power spectral density of the noise coming from a distant object per unit of surface, and in the context of radioastronomy, is usually measured in **Janskys** ($1\text{ Jy}=10^{-26}\text{W}\text{m}^{-2}\text{Hz}^{-1}$). The spectral density of the power collected by the antenna is related to the spectral flux $F$ by the antenna aperture $A$:
+Now let's consider what happens to the output PSD if our antenna is perfectly oriented towards a point source like Cas A or Cygnus A (with angular sizes way below 1º). Since these sources are rather small and/or irregular, and therefore difficult to characterize in terms of temperature and angular diameter, we will take instead their [spectral irradiance (also known as flux density)](https://en.wikipedia.org/wiki/Irradiance#Spectral_irradiance) into account. This quantity describes the noise PSD coming from a distant source per unit of surface which, in the field of radioastronomy, is usually measured in **Janskys** ($1\text{ Jy}=10^{-26}\text{W}\text{m}^{-2}\text{Hz}^{-1}$). The PSD collected by the antenna is related to the spectral flux $F$ by the antenna aperture $A$:
 
 $$
 \frac{dP}{d\nu}=AF
@@ -59,7 +59,7 @@ $$
 A=\eta A_d=\frac{1}{4}{\eta \pi D_d^2}
 $$
 
-With $D_d$ the diameter of the dish. A typical value for the aperture efficiency of dish antennas is 65%, but we'll be somewhat conservative here and give it a modest 50%. Then, the power spectral density increment due to this source can be approximated by:
+With $D_d$ the diameter of the dish. A typical value for the aperture efficiency of dish antennas is 65%, but we'll be somewhat conservative here and give it a more modest 50%. Then, the power spectral density increment due to this source can be approximated by:
 
 $$
 \Delta S=\frac{1}{4}G\eta \pi D_d^2F
@@ -81,9 +81,9 @@ Which is a quantity that does not depend on the gain, but on all noise component
 * Background sky temperature: $15 \text{ K}$
 * Source intensity: $500\text{ Jy}$
 
-Injecting these values in the above expression yields a poor 0.004 dB increment in the noise output. By reducing the spillover loss to 0.1, the increment nears 0.01 dB. Still low, but as long as the standard deviation keeps equally low, we would be able to detect them. Ideally, we could integrate the output a lot (either by increasing the bandwidth or the integration time, or even both) in order to reduce the fluctuations and get a more or less accurate result. The question is, does our LNB behave that well?
+Injecting these values in the above expression yields a poor 0.004 dB increment in the noise output. By reducing the spillover loss to 0.1, the increment nears 0.01 dB. Still low, but as long as the standard deviation keeps equally low, we would be able to detect them. Ideally, we could integrate the output a lot (either by increasing the bandwidth or the integration time, or even both) in order to reduce the fluctuations and get a more or less significant detection. The question is, will a LNB designed to receive satellite TV cooperate with us?
 
-In the next chapter, I'll describe my experiments with a typical C-Band LNB and show why things are not as easy as they seem.
+In the next chapter, I'll describe my experiments with a typical C-Band LNB and explain why things are not as easy as they seem.
 
 Stay tuned!
 
