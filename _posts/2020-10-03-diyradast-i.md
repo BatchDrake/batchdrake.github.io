@@ -8,7 +8,7 @@ mathjax: true
 Hi, everyone! It's been a while since my last blog post here. I couldn't help it: I began a master's degree in [Astrophysics in the UCM](https://www.ucm.es/masterastrofisica) last year, and a lot has been going on since then. In particular, I had an assignment for the subject Extragalactic Astrophysics, consisting on a scientific poster based on a freely chosen paper out of a list provided by the teacher.
 
 One of the papers in the list was [Measurement of the flux density of Cas A at 4080 Mc/s](http://adsabs.harvard.edu/full/1965ApJ...142.1149P) by [Arno Penzias](https://es.wikipedia.org/wiki/Arno_Allan_Penzias) and [Robert Wilson](https://en.wikipedia.org/wiki/Robert_Woodrow_Wilson). This paper is particularly interesting for two reasons: first, this is the paper that led to the discovery of the [Cosmic Microwave Background](https://en.wikipedia.org/wiki/Cosmic_microwave_background). Spoiler alert: they measured Cassiopeia A flux at 4 GHz successfully, being ~1 kJy, overestimaing its secular dimming to 1.1% per year. Second, **it talks about radioastronomy in 4 GHz**, and as we all know, radio is inherently **fun**.
-<center>![]({{ site.baseurl }}/images/holmdel.jpg) </center>
+<center><img src="{{ site.baseurl }}/images/holmdel.jpg" /> </center>
 <center><small><em>The Holmdel horn antenna, whose calibration by Arno Penzias and Robert Wilson led to the discovery of the CMB. Image courtesy of <a href="https://commons.wikimedia.org/wiki/File:Bell_Labs_Horn_Antenna_Crawford_Hill_NJ.jpg">Wikimedia Commons</a></em></small></center>
 <!--more-->
 
@@ -19,7 +19,7 @@ From the hobbyist perspective, 4 GHz radioastronomy is especially relevant for e
 * Noise figure (typical): 17 K
 * Gain flatness: 1 dB in 36 MHz.
 
-<center>![]({{ site.baseurl }}/images/lnb.jpg) </center>
+<center><img src="{{ site.baseurl }}/images/lnb.jpg" /></center>
 <center><small><em>Typical C-Band LNB <a href="https://www.amazon.es/High-Performance-C-band-PLL-LNBF/dp/B00HVM6LFS">found in Amazon</a></em></small></center>
 
 Of course, an LNB alone is of little use. We need an appropriate parabolic reflector in order to get an usable beamwidth. According to this [online calculator](https://www.satsig.net/pointing/antenna-beamwidth-calculator.htm), dishes as small as 120 cm with a 0.65 efficiency have a 3 dB beamwidth of 4.22º.
@@ -28,7 +28,7 @@ The question arises almost naturally out of these numbers: can I reproduce Penzi
 
 Let's start by calculating a rough estimate of the order of magnitude of the power increment due to the presence of Cyg A/Cas A with respecto to the background sky noise. According to this graph, we could assume that the background noise is dominated by the CMB at 2.9 K. But since both Cyg A and Cas A are rather close to the galactic plane, we'll be a bit more pessimistic and extend the C curve horizontally, rising the floor up to 15 K:
 
-<center>![]({{ site.baseurl }}/images/noises2.gif) </center>
+<center><img src="{{ site.baseurl }}/images/noises2.gif" /></center>
 <center><small><em>Image obtained from <a href="https://azrefs.org/recommendation-itu-r-p-372-8-radio-noise.html">azrefs.org</a></em></small></center>
 
 The power spectral density at the LNB output when the beam (including all its sidelobes) covers a fixed-noise temperature region in the sky can be naively modelled as Johnson-Nyquist noise by:
