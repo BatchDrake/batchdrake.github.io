@@ -19,7 +19,7 @@ From the hobbyist perspective, 4 GHz radioastronomy is especially relevant for e
 * Noise figure (typical): 17 K
 * Gain flatness: 1 dB in 36 MHz.
 
-![]({{ site.baseurl }}/images/holmdel.jpg) 
+![]({{ site.baseurl }}/images/lnb.jpg) 
 <center><small><em>Typical C-Band LNB (https://www.amazon.es/High-Performance-C-band-PLL-LNBF/dp/B00HVM6LFS)</em></small></center>
 
 Of course, an LNB alone is of little use. We need an appropriate parabolic reflector in order to get an usable beamwidth. According to this [online calculator](https://www.satsig.net/pointing/antenna-beamwidth-calculator.htm), dishes as small as 120 cm with a 0.65 efficiency have a 3 dB beamwidth of 4.22º.
