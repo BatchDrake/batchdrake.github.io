@@ -24,12 +24,14 @@ From the hobbyist perspective, 4 GHz radioastronomy is especially relevant for e
 
 Of course, an LNB alone is of little use. We need an appropriate parabolic reflector in order to get an usable beamwidth. According to this [online calculator](https://www.satsig.net/pointing/antenna-beamwidth-calculator.htm), dishes as small as 120 cm with a 0.65 efficiency have a 3 dB beamwidth of 4.22º.
 
-The obvious question that anyone would ask after these impressive numbers are obvious: can I reproduce Penzias & Wilson experiments With all these data, we can make a rough estimate of the order of magnitude of the power increment due to the presence of a point source of 500 Jy on a fixed-temperature background. According to this graph, we could assume that the background noise is dominated by the CMB at 2.9 K. But since both Cyg A and Cas A are rather close to the galactic plane, we'll be a bit more pessimistic and extend the C curve horizontally, rising the floor up to 15 K.
+The question arises almost naturally out of these numbers: can I reproduce Penzias & Wilson experiments at home? 
+
+Let's start by calculating a rough estimate of the order of magnitude of the power increment due to the presence of Cyg A/Cas A with respecto to the background sky noise. According to this graph, we could assume that the background noise is dominated by the CMB at 2.9 K. But since both Cyg A and Cas A are rather close to the galactic plane, we'll be a bit more pessimistic and extend the C curve horizontally, rising the floor up to 15 K:
 
 ![]({{ site.baseurl }}/images/noises2.gif) 
-<center><small><em>Image obtained from https://azrefs.org/recommendation-itu-r-p-372-8-radio-noise.html</em></small></center>
+<center><small><em>Image obtained from [azrefs.org](https://azrefs.org/recommendation-itu-r-p-372-8-radio-noise.html)</em></small></center>
 
-The power spectral density at the LNB output when the beam (including all its sidelobes) covers a fixed-noise temperature region in the sky can be naively modelled as:
+The power spectral density at the LNB output when the beam (including all its sidelobes) covers a fixed-noise temperature region in the sky can be naively modelled as Johnson-Nyquist noise by:
 
 $$
 S_b=\frac{dP}{d\nu}=G(k_BT_{n}+k_BT_{s})
@@ -45,13 +47,13 @@ $$
 
 $S$ will be our background sky level, as seen at the output of the LNB. In general, the power spectral density for astronomical sources is rather white (i.e. flat), even if we consider the typical bandwidths (~3 MHz) supported by low cost SDR receivers.
 
-Now let's consider what happens to the output power spectral density if our antenna is perfectly oriented towards a point source like Cas A or Cygnus A (with angular sizes way below 1º). Since these sources are rather small and/our could be irregular and therefore difficult to characterize in terms of temperature and angular diameter, we will use a different approach: we'll take the [spectral irradiance (also known as flux density)](https://en.wikipedia.org/wiki/Irradiance#Spectral_irradiance) of the source into account. This quantity describes the power spectral density of the noise coming from a distant object per unit of surface, and in the context of radioastronomy, is usually measured in **Janskys (Jy)** ($1\text{ Jy}=10^{-26}\text{W}\text{m}^{-2}\text{Hz}^{-1}$). The spectral density of the power collected by the antenna is related to the spectral flux $F$ by the antenna aperture $A$:
+Now let's consider what happens to the output power spectral density if our antenna is perfectly oriented towards a point source like Cas A or Cygnus A (with angular sizes way below 1º). Since these sources are rather small and/or irregular, and therefore difficult to characterize in terms of temperature and angular diameter, we will take their [spectral irradiance (also known as flux density)](https://en.wikipedia.org/wiki/Irradiance#Spectral_irradiance) into account instead. This quantity describes the power spectral density of the noise coming from a distant object per unit of surface, and in the context of radioastronomy, is usually measured in **Janskys** ($1\text{ Jy}=10^{-26}\text{W}\text{m}^{-2}\text{Hz}^{-1}$). The spectral density of the power collected by the antenna is related to the spectral flux $F$ by the antenna aperture $A$:
 
 $$
 \frac{dP}{d\nu}=AF
 $$
 
-For both Cas A and Cyg A, the order of magnitude of the spectral flux is 500 Jy. In parabolic antennas, the antenna aperture is related to the dish area by a dimensionless factor named **aperture efficiency**, which describes how much of the received power is actually collected by the dish with respect to its physical size. We'll call this factor $\eta$:
+For both Cas A and Cyg A, the order of magnitude of the spectral flux is 500 Jy. In parabolic antennas, the antenna aperture is related to the dish area by a dimensionless factor called **aperture efficiency**, which describes how much of the received power is actually collected by the dish with respect to its physical size. We'll call this factor $\eta$:
 
 $$
 A=\eta A_d=\frac{1}{4}{\eta \pi D_d^2}
@@ -69,7 +71,7 @@ $$
 \Delta S_{dB}=10\text{log}_{10}\left(S+\Delta S\right)-10\text{log}_{10}(S)=10\text{log}_{10}\left(\frac{S+\Delta S}{S}\right)
 $$
 
-Which is a quantity that does not depend on the gain, but on all the noise components. Now, let's see how $\Delta S_{dB}$ behaves on a typical (mostly suboptimal) setup:
+Which is a quantity that does not depend on the gain, but on all noise components. Now, let's see how $\Delta S_{dB}$ behaves on a typical (mostly suboptimal) setup:
 
 * Antenna diameter: $1.1 \text{ m}$
 * Ambient temperature: $300\text{ K}$
