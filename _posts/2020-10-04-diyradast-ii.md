@@ -4,18 +4,17 @@ title: Amateur radioastronomy in 4 GHz (II)
 comments: true
 mathjax: true
 ---
-
-Alright, so earlier last summer I managed to gather all the necessary parts for my DIY C-Band radiotelescope. My initial goal was to buy a primary focus dish somewhere near Madrid. Unfortunately, those are extremely difficult to find in Spain because reasons, at least at a reasonable price. I had to switch to plan B, this is, a medium-sized 110x120 cm offset antenna that was eventually purchased from [diesl](https://en.diesl.com/) for an extremely reasonable amount (65€). Since the LNB is designed for primary focus dishes, I had to buy a [conical scalar ring](https://es.aliexpress.com/item/32861851871.html?spm=a2g0o.productlist.0.0.7d3143bbllaJlo&algo_pvid=fbf6f736-6850-459c-98d5-7da8635decbe&algo_expid=fbf6f736-6850-459c-98d5-7da8635decbe-3&btsid=0b0a119a16017570152155016ec240&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_) so that the dish was completely illuminated (hence reducing spillover losses to a minimum).
-
-The LNB I ended up purchasing was the [Titanium C1-PLL](https://www.titaniumsatellite.com/c1pll) because of its integrated WiMax/LTE/WiFi notch filters. Man-made radio interference is one of the biggest threats to radioastronomy in general, and it is rather easy to saturate a 65 dB amplifier with the (seemengly) faintest undesired signal.
-
 <center><img src="{{ site.baseurl }}/images/lnb.jpg" /></center>
 <center><small><em>The Titanium C1-PLL</em></small></center>
+
+Alright, so earlier last summer I managed to gather all the necessary parts for my DIY C-Band radiotelescope. My initial goal was to buy a primary focus dish somewhere near Madrid. Unfortunately, those are extremely difficult to find in Spain because reasons, at least at a reasonable price. I had to switch to plan B, this is, a medium-sized 110x120 cm offset antenna that was eventually purchased from [diesl](https://en.diesl.com/) for an extremely reasonable amount (65€). Since the LNB is designed for primary focus dishes, I had to buy a [conical scalar ring](https://es.aliexpress.com/item/32861851871.html?spm=a2g0o.productlist.0.0.7d3143bbllaJlo&algo_pvid=fbf6f736-6850-459c-98d5-7da8635decbe&algo_expid=fbf6f736-6850-459c-98d5-7da8635decbe-3&btsid=0b0a119a16017570152155016ec240&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_) so that the dish was completely illuminated (hence reducing spillover losses to a minimum).
+<!--more-->
+
+The LNB I ended up purchasing was the [Titanium C1-PLL](https://www.titaniumsatellite.com/c1pll) because of its integrated WiMax/LTE/WiFi notch filters. Man-made radio interference is one of the biggest threats to radioastronomy in general, and it is rather easy to saturate a 65 dB amplifier with the (seemengly) faintest undesired signal.
 
 Another reason why I ended up buying this one was it is PLL-driven. Compared to the cheaper DRO-based LNBFs, frequency stability of PLL-based LNBs is in general terms better than that of its DRO-based alternatives and somewhat more resistant to aging. For this application, frequency stability is not critical (we are measuring the PSD of a rather flat signal, and therefore frequency drifts will be barely noticeable). However, since radioastronomy is only one of my side projects and, in general (but especially for radio), _cheap is expensive_, I decided to spend more money in something durable.
 
 And regarding the receiver part, I relied on my beloved AirSpy Mini as usual.
-<!--more-->
 
 ### LNBs in a nutshell
 It is important to recall how sat TV LNBs work before going on. LNBs are basically amplified downconverters plugged to a pair of perpendicular switchable antennas and optional filters. For C-band LNBs, the downconverter is implemented as a mixer plugged to a local oscillator running at 5150 MHz. This means that the mixing products of a 4 GHz signal will be at 9150 MHz (which is filtered) and -1150 MHz. The minus sign means that the spectrum of the mixing product will be reversed with respect to the original signal. Compare it to the typical Ku-band LNB, which mixes a 9750 MHz LO with a 10.7 GHz input signal, getting the lower mixing product in 950 MHz (positive).  Reversing the spectrum affects the phases of the signal but not its amplitudes, and therefore has no effect on its PSD either.
