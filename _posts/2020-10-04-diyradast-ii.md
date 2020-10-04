@@ -69,7 +69,7 @@ $$
 <center><img src="{{ site.baseurl }}/images/reallna.png" /></center>
 <center><small><em>A more realistic model.</em></small></center>
 
-I basically discovered that $\frac{\partial G}{\partial T}<0$ the hard way. Using linear regression, I could estimate a gain to temperature slope of $-0.1\text{ dB/K}$, which I attempted to use to compensate for this gain fluctuations. The results after the correction were still disappointing:
+I basically discovered that $\frac{\partial G}{\partial T}<0$ the hard way. Using linear regression, I could estimate a gain to temperature slope of $-0.1\text{ dB/K}$, which I attempted to use to compensate for these gain fluctuations. The results after the correction were still disappointing:
 
 <center><img src="{{ site.baseurl }}/images/corrections.png" /></center>
 <center><small><em>Integrated power, still unstable.</em></small></center>
